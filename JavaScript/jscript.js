@@ -18,5 +18,7 @@ function getHumanChoice() {
     }
     return result.toLowerCase();
 }
-
 //console.log(getHumanChoice()); // rock, paper, or scissors
+
+let humanScore = 0;
+let computerScore = 0;
