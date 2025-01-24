@@ -8,7 +8,6 @@ function getComputerChoice() {
         return 'scissors';
     }
 }
-
 //console.log(getComputerChoice()); // rock, paper, or scissors
 
 function getHumanChoice() {
@@ -20,4 +19,4 @@ function getHumanChoice() {
     return result.toLowerCase();
 }
 
-console.log(getHumanChoice()); // rock, paper, or scissors
+//console.log(getHumanChoice()); // rock, paper, or scissors
