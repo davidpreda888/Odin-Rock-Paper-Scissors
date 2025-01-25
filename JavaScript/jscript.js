@@ -43,3 +43,19 @@ function playRound(humanChoice, computerChoice) {
         return `You lose! ${computerChoice} beats ${humanChoice}`;
     }   
 }
+
+
+function playGame(){
+    while (humanScore < 5 && computerScore < 5) {
+        let humanChoice = getHumanChoice();
+        let computerChoice = getComputerChoice();
+        console.log(playRound(humanChoice, computerChoice));
+    }
+    if (humanScore === 5) {
+        console.log('You won the game!');
+    } else {
+        console.log('You lost the game!');
+    }
+}
+
+playGame();
