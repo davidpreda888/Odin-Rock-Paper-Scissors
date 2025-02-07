@@ -10,15 +10,15 @@ function getComputerChoice() {
 }
 //console.log(getComputerChoice()); // rock, paper, or scissors
 
-function getHumanChoice() {
-    let result = prompt('Choose between rock, paper or scissors');
-    result = result.toLowerCase();
-    while (result!== 'rock' && result !== 'paper' && result !== 'scissors') {
-        console.log('Invalid choice');
-        result = prompt('Choose between rock, paper or scissors');
-    }
-    return result;
-}
+// function getHumanChoice() {
+//     let result = prompt('Choose between rock, paper or scissors');
+//     result = result.toLowerCase();
+//     while (result!== 'rock' && result !== 'paper' && result !== 'scissors') {
+//         console.log('Invalid choice');
+//         result = prompt('Choose between rock, paper or scissors');
+//     }
+//     return result;
+// }
 //console.log(getHumanChoice()); // rock, paper, or scissors
 
 let humanScore = 0;
@@ -44,18 +44,39 @@ function playRound(humanChoice, computerChoice) {
     }   
 }
 
-
 function playGame(){
-    while (humanScore < 5 && computerScore < 5) {
+    while (humanScore < 3 && computerScore < 3) {
         let humanChoice = getHumanChoice();
         let computerChoice = getComputerChoice();
         console.log(playRound(humanChoice, computerChoice));
     }
-    if (humanScore === 5) {
+    if (humanScore === 3) {
         console.log('You won the game!');
     } else {
         console.log('You lost the game!');
     }
 }
 
-playGame();
+
+const options = document.querySelectorAll("button");
+
+options.forEach(button => {
+    button.addEventListener("click", (event) => {
+        let target = event.target;
+
+        switch(target.className) {
+            case "rock" :
+                playRound("rock",getComputerChoice());
+                break;
+            
+            case "paper" :
+                playRound("paper",getComputerChoice());
+                break;
+        
+            case "scissors" :
+                playRound("scissors",getComputerChoice());
+                break;
+        }
+        // alert("Hello world");
+    });
+});
