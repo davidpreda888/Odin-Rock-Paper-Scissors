@@ -8,58 +8,30 @@ function getComputerChoice() {
         return 'scissors';
     }
 }
-//console.log(getComputerChoice()); // rock, paper, or scissors
-
-// function getHumanChoice() {
-//     let result = prompt('Choose between rock, paper or scissors');
-//     result = result.toLowerCase();
-//     while (result!== 'rock' && result !== 'paper' && result !== 'scissors') {
-//         console.log('Invalid choice');
-//         result = prompt('Choose between rock, paper or scissors');
-//     }
-//     return result;
-// }
-//console.log(getHumanChoice()); // rock, paper, or scissors
 
 let humanScore = 0;
 let computerScore = 0;
 
 const score = document.querySelector(".score");
 
-
 function playRound(humanChoice, computerChoice) {
 
     if (humanChoice === computerChoice) {
-        score.textContent = `${computerScore} - ${humanScore}`
-
-        return `It's a tie!`;
+        score.textContent = `It's a tie! ${humanScore} - ${computerScore}`
+        return;
 
     } else if (humanChoice === "rock" && computerChoice === "scissors" ||
         humanChoice === "paper" && computerChoice === "rock" ||
         humanChoice === "scissors" && computerChoice === "paper") {
         humanScore++;
-        score.textContent = `${computerScore} - ${humanScore}`
-
-        return `You win! ${humanChoice} beats ${computerChoice}`;
+        score.textContent = `You won this round: ${humanScore} - ${computerScore}`
+        return;
     } else {
         computerScore++;
-        score.textContent = `${computerScore} - ${humanScore}`
-
-        return `You lose! ${computerChoice} beats ${humanChoice}`;
-    }   
-}
-
-function playGame(){
-    while (humanScore < 3 && computerScore < 3) {
-        let humanChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-        console.log(playRound(humanChoice, computerChoice));
+        score.textContent = `You lost this round: ${humanScore} - ${computerScore}`
+        return;
     }
-    if (humanScore === 3) {
-        console.log('You won the game!');
-    } else {
-        console.log('You lost the game!');
-    }
+       
 }
 
 
@@ -81,6 +53,17 @@ options.forEach(button => {
             case "scissors" :
                 playRound("scissors",getComputerChoice());
                 break;
+        }
+        if(humanScore === 3){
+            score.textContent = `You won ${humanScore} to ${computerScore}!`;
+            humanScore = 0;
+            computerScore = 0;
+        }
+
+        if(computerScore === 3){
+            score.textContent = `You lost ${computerScore} to ${humanScore}`;
+            humanScore = 0;
+            computerScore = 0;
         }
     });
 });
