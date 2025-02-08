@@ -1,0 +1,23 @@
+{
+  "name": "odin-rock-paper-scissors",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidpreda888/Odin-Rock-Paper-Scissors.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidpreda888/Odin-Rock-Paper-Scissors/issues"
+  },
+  "homepage": "https://github.com/davidpreda888/Odin-Rock-Paper-Scissors#readme",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
