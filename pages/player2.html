@@ -7,44 +7,53 @@
 </head>
 <body>
 
-    <button class="rock">Rock</button>
-    <button class="paper">Paper</button>
-    <button class="scissors">Scissors</button>
+    <button class="rock" onclick="sendChoice('rock')">Rock</button>
+    <button class="paper" onclick="sendChoice('paper')">Paper</button>
+    <button class="scissors" onclick="sendChoice('scissors')">Scissors</button>
 
     <script>
         const ws = new WebSocket("ws://localhost:8082");
 
         ws.addEventListener("open", () => {
             console.log("We have connected!");
-
-            ws.send("Hey server!");
+            ws.send(JSON.stringify({ type: "register", player: 2}));
         });
 
         ws.addEventListener("message", e => {
-           console.log(e.data); 
+        console.log(e.data); 
+
+        const data = JSON.parse(e.data);
+        if (data.type === "result") {
+            alert(`Result: ${data.result}\nYou chose: ${data.yourChoice}\nOpponent chose: ${data.opponentChoice}`);
+        }
         });
 
-        const options = document.querySelectorAll("button");
+        function sendChoice(choice) {
+            ws.send(JSON.stringify({ type: "choice", player: 2, choice }));
+            console.log(`You chose: ${choice}`);
+        }
 
-        options.forEach(button => {
-            button.addEventListener("click", (event) => {
-                let target = event.target;
+        // const options = document.querySelectorAll("button");
 
-                switch(target.className) {
-                    case "rock" :
-                        ws.send('rock2');
-                        break;
+        // options.forEach(button => {
+        //     button.addEventListener("click", (event) => {
+        //         let target = event.target;
+
+        //         switch(target.className) {
+        //             case "rock" :
+        //                 ws.send('rock2');
+        //                 break;
                     
-                    case "paper" :
-                        ws.send('paper2');
-                        break;
+        //             case "paper" :
+        //                 ws.send('paper2');
+        //                 break;
                 
-                    case "scissors" :
-                        ws.send('scissors2');
-                        break;
-                }
-            });
-        });
+        //             case "scissors" :
+        //                 ws.send('scissors2');
+        //                 break;
+        //         }
+        //     });
+        // });
     </script>
 </body>
 </html>
