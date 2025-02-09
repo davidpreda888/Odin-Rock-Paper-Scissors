@@ -1,6 +1,9 @@
 const WebSocket = require("ws");
 
-const wss = new WebSocket.Server({ port: 8082 });
+const port = process.env.PORT || 8082;
+const wss = new WebSocket.Server({ port });
+console.log(`WebSocket server is running on port ${port}`);
+
 let players = [];
 let choices = {};
 
