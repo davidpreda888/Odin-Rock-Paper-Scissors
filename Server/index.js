@@ -16,7 +16,7 @@ wss.on("connection", ws => {
 
     const playerId = players.length + 1;
     players.push(ws);
-    ws.send(JSON.stringify({ type: "info", message: `You are player ${playerId}`}));
+    ws.send(JSON.stringify({ type: "info", player: playerId, message: `You are player ${playerId}`}));
 
     ws.on("message", (message) => {
         console.log(`Client sent: ${message}`);

@@ -6,9 +6,39 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="./player1.html">Player 1</a>
-    <a href="./player2.html">Player 2</a>
 
-    <script></script>
+    <button class="rock" onclick="sendChoice('rock')">Rock</button>
+    <button class="paper" onclick="sendChoice('paper')">Paper</button>
+    <button class="scissors" onclick="sendChoice('scissors')">Scissors</button>
+    <!-- <a href="./player1.html">Player 1</a>
+    <a href="./player2.html">Player 2</a> -->
+
+    <script>
+        const ws = new WebSocket("ws://localhost:8082");
+
+        let playerNumber = null;
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            if (data.type === "info") {
+                playerNumber = data.player;  // Server assigns the player number
+                console.log(`You are Player ${playerNumber}`);
+            }
+
+            if (data.type === "result") {
+                alert(`Result: ${data.result}\nYou chose: ${data.yourChoice}\nOpponent chose: ${data.opponentChoice}`);
+            }
+        };
+
+        function sendChoice(choice) {
+            if (playerNumber !== null) {
+                ws.send(JSON.stringify({ type: "choice", player: playerNumber, choice }));
+            } else {
+                alert("Waiting for the server to assign a player number.");
+            }
+        }
+
+    </script>
 </body>
 </html>
