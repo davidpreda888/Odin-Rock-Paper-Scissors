@@ -17,7 +17,7 @@
         ws.addEventListener("open", () => {
             console.log("We have connected!");
 
-            ws.send("Hey server!");
+            // ws.send("Hey server!");
         });
 
         ws.addEventListener("message", e => {
@@ -32,15 +32,15 @@
 
                 switch(target.className) {
                     case "rock" :
-                        ws.send('rock');
+                        ws.send('rock1');
                         break;
                     
                     case "paper" :
-                        ws.send('paper');
+                        ws.send('paper1');
                         break;
                 
                     case "scissors" :
-                        ws.send('scissors');
+                        ws.send('scissors1');
                         break;
                 }
             });

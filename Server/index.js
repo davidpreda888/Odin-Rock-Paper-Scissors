@@ -8,7 +8,13 @@ wss.on("connection", ws => {
     ws.on("message", data => {
         console.log(`Client sent: ${data}`);
 
-        ws.send(data.toString());
+        wss.clients.forEach( (client) => {
+            if (client !== ws && client.readyState === WebSocket.OPEN) {
+                client.send(data.toString());
+            }
+        });
+
+        // ws.send(data.toString());
     });
 
     ws.on("close", () => {
