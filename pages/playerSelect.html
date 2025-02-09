@@ -3,37 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Odin Rock Paper Scissors</title>
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
+    <div class="title">Rock Paper Scissors</div>
+    <div class="playerId"></div>
 
+    <div class="options">
     <button class="rock" onclick="sendChoice('rock')">Rock</button>
     <button class="paper" onclick="sendChoice('paper')">Paper</button>
     <button class="scissors" onclick="sendChoice('scissors')">Scissors</button>
-    <!-- <a href="./player1.html">Player 1</a>
-    <a href="./player2.html">Player 2</a> -->
+    </div>
 
     <script>
         const ws = new WebSocket("wss://odin-rock-paper-scissors.onrender.com");
+
+        const options = document.querySelector(".options");
+        const picks = document.querySelectorAll("button");
+        const playerId = document.querySelector(".playerId");
+
 
         let playerNumber = null;
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
+            // const playerId = document.querySelector(".playerId");
+
 
             if (data.type === "info") {
                 playerNumber = data.player;  // Server assigns the player number
                 console.log(`You are Player ${playerNumber}`);
+
+                playerId.textContent = `You are player ${playerNumber}`;
             }
 
             if (data.type === "result") {
-                alert(`Result: ${data.result}\nYou chose: ${data.yourChoice}\nOpponent chose: ${data.opponentChoice}`);
+                playerId.textContent= `${data.result} You chose: ${data.yourChoice} and the opponent chose: ${data.opponentChoice}`;
+                picks.forEach(op => {
+                    options.appendChild(op)
+                });
             }
         };
 
         function sendChoice(choice) {
             if (playerNumber !== null) {
                 ws.send(JSON.stringify({ type: "choice", player: playerNumber, choice }));
+                while (options.firstChild) {
+                    options.removeChild(options.firstChild);
+                }
+                
+                if (playerNumber === 1){
+                playerId.textContent =`Waiting on player 2...`;
+                }
+                if (playerNumber === 2) {
+                    playerId.textContent =`Waiting on player 1...`;
+                }
             } else {
                 alert("Waiting for the server to assign a player number.");
             }

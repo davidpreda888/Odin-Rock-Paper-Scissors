@@ -31,6 +31,8 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+
+/* Styling against the computer */
 .opponents {
     display: flex;
     gap: 30px;
@@ -57,7 +59,8 @@ body {
 }
 
 .result,
-.score {
+.score,
+.playerId {
     font-size: 40px;
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -81,3 +84,4 @@ body {
     transform: scale(1.05);
 }
 
+/* Styling for player vs player */
