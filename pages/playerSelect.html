@@ -41,7 +41,7 @@
             if (data.type === "result") {
                 playerId.textContent= `${data.result} You chose: ${data.yourChoice} and the opponent chose: ${data.opponentChoice}`;
                 picks.forEach(op => {
-                    options.appendChild(op)
+                    options.appendChild(op);
                 });
             }
         };

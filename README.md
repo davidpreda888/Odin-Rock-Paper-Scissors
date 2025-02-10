@@ -8,5 +8,9 @@ To accomplish this, I used the WebSocket API from Node.Js to allow real-time
 two-way communication between players. To manage the data coming from both players,
 I hosted the backend on Render as it has built in WebSocket and Node.Js support.
 
+For the full experience, the server must be deployed before going on the website
+as it is only the free version of Render which goes "silent" after 15min of no 
+activity on the website.
+
 Future additions to this would to be to add a "link" feature where players could
 send specific links to each other to join their lobbies and not the entire server.
